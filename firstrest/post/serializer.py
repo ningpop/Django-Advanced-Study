@@ -6,5 +6,5 @@ class PostSerializer(serializers.ModelSerializer):
         model = Post
         fields = '__all__'
         # fields = ['id', 'title', 'body']
-        read_only_fields = ('title',)
+        # read_only_fields = ('title',)
         # write_only_fields = ('title',)
