@@ -11,18 +11,31 @@
 #     path('', include(router.urls)),
 # ]
 
-from django.urls import path
-from rest_framework.urlpatterns import format_suffix_patterns
+''' generic CBV '''
+# from django.urls import path
+# from rest_framework.urlpatterns import format_suffix_patterns
+# from post import views
+
+# # Default Router 사용 X ==> API ROOT 없음. 
+
+# urlpatterns = [
+#     # 127.0.0.1:8000/post == ListView
+#     path('post/', views.PostList.as_view()),  
+#     # 127.0.0.1:8000/post/<pk> == DetailView
+#     path('post/<int:pk>/', views.PostDetail.as_view()), 
+# ]
+
+# urlpatterns = format_suffix_patterns(urlpatterns)
+
+''' ViewSet '''
+from rest_framework.routers import DefaultRouter
+from django.urls import path, include
 from post import views
 
-# Default Router 사용 X ==> API ROOT 없음. 
+# 라우터가 없다면?
+router = DefaultRouter()
+router.register('post', views.PostViewSet)
 
 urlpatterns = [
-    # 127.0.0.1:8000/post == ListView
-    path('post/', views.PostList.as_view()),  
-    # 127.0.0.1:8000/post/<pk> == DetailView
-    path('post/<int:pk>/', views.PostDetail.as_view()), 
+    path('', include(router.urls))
 ]
-
-#
-urlpatterns = format_suffix_patterns(urlpatterns)
