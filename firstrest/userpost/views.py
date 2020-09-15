@@ -10,7 +10,8 @@ from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticate
 
 class UserPostViewSet(viewsets.ModelViewSet):
     # views에서의 인증 방식 등록하기
-    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    # authentication_classes = [TokenAuthentication, SessionAuthentication]
+    authentication_classes = [TokenAuthentication]
     # views에서의 권한 등록하기
     permission_classes = [IsAdminUser]
 
