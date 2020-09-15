@@ -3,9 +3,12 @@ from userpost.serializer import UserSerializer
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 
+from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+
 # Create your views here.
 
 class UserPostViewSet(viewsets.ModelViewSet):
+    authentication_classes = [BasicAuthentication, SessionAuthentication]
     queryset = UserPost.objects.all()
     serializer_class = UserSerializer
 
@@ -28,3 +31,6 @@ class UserPostViewSet(viewsets.ModelViewSet):
             qs = qs.none()
         
         return qs
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)

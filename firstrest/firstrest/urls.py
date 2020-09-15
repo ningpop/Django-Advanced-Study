@@ -21,5 +21,5 @@ import userpost.urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('post.urls')),
-    path('userpost', include('userpost.urls')),
+    path('userpost/', include('userpost.urls')),
 ]
