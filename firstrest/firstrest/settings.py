@@ -128,12 +128,16 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 4
 }
 
-# 전역으로 인증 방식 등록하기
 '''
 REST_FRAMEWORK = {
+    # 전역으로 인증 방식 등록하기
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.BasicAuthentication',
         'rest_framework.authentication.SessionAuthentication',
+    ],
+    # 전역으로 권한 설정하기
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
     ]
 }
 '''

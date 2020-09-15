@@ -3,12 +3,17 @@ from userpost.serializer import UserSerializer
 from rest_framework import viewsets
 from rest_framework.filters import SearchFilter
 
-from rest_framework.authentication import BasicAuthentication, SessionAuthentication
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly, IsAdminUser
 
 # Create your views here.
 
 class UserPostViewSet(viewsets.ModelViewSet):
-    authentication_classes = [BasicAuthentication, SessionAuthentication]
+    # views에서의 인증 방식 등록하기
+    authentication_classes = [TokenAuthentication, SessionAuthentication]
+    # views에서의 권한 등록하기
+    permission_classes = [IsAdminUser]
+
     queryset = UserPost.objects.all()
     serializer_class = UserSerializer
 
