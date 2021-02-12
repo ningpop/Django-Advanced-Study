@@ -1,7 +1,10 @@
 from rest_framework import viewsets, serializers
-from .models import Essay
-from .serializers import EssaySerializer
+from .models import Essay, Album, Files
+from .serializers import EssaySerializer, AlbumSerializer, FilesSerializer
 from rest_framework.filters import SearchFilter
+from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.response import Response
+from rest_framework import status
 
 class PostViewSet(viewsets.ModelViewSet):
 
@@ -21,3 +24,21 @@ class PostViewSet(viewsets.ModelViewSet):
         else:
             qs = qs.none()
         return qs
+
+class ImgViewSet(viewsets.ModelViewSet):
+    queryset = Album.objects.all()
+    serializer_class = AlbumSerializer
+
+class FileViewSet(viewsets.ModelViewSet):
+    queryset = Files.objects.all()
+    serializer_class = FilesSerializer
+
+    parser_classes = (MultiPartParser, FormParser)
+
+    def post(self, request, *args, **kwargs):
+        serializers = FilesSerializer(data=request.data)
+        if serializers.is_valid():
+            serializers.save()
+            return Response(serializers.data, status=HTTP_201_CREATED)
+        else:
+            return Response(serializers.error, status=HTTP_400_BAD_REQUEST)
