@@ -162,4 +162,7 @@ pip-selfcheck.json
 # Ignore all local history of files
 .history
 
+# about drf project
+myvenv/
+
 # End of https://www.toptal.com/developers/gitignore/api/venv,visualstudiocode,python
